@@ -27,16 +27,23 @@ if isdirectory(expand('$HOME/.vim/bundle/Vundle.vim'))
   Plugin 'ggreer/the_silver_searcher'
   Plugin 'FelikZ/ctrlp-py-matcher'
   Plugin 'NLKNguyen/papercolor-theme'
+  Plugin 'google/vim-maktaba'
+  Plugin 'google/vim-codefmt'
+  Plugin 'google/vim-searchindex'
+  Plugin 'google/vim-glaive'
   " Provide many default snippets for a variety of snippets.
   " Uncomment and :PluginInstall to enable
-
   call vundle#end()
+  " the glaive#Install() should go after the "call vundle#end()"
+  call glaive#Install()
 else
   echomsg 'Vundle is not installed. You can install Vundle from'
         \ 'https://github.com/VundleVim/Vundle.vim'
 endif
 
 " All of your plugins must be added before the following line.
+
+Glaive codefmt plugin[mappings]
 
 " Enable file type based indent configuration and syntax highlighting.
 " Note that when code is pasted via the terminal, vim by default does not detect
