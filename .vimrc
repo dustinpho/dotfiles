@@ -13,38 +13,28 @@ if isdirectory(expand('$HOME/.vim/bundle/Vundle.vim'))
   Plugin 'gmarik/vundle'
   " Install plugins that come from github.  Once Vundle is installed, these can be
   " installed with :PluginInstall
-  Plugin 'Valloric/YouCompleteMe'
   Plugin 'tpope/vim-sensible'
-  Plugin 'vim-airline/vim-airline'
-  Plugin 'vim-airline/vim-airline-themes'
-  Plugin 'rafi/awesome-vim-colorschemes'
-  Plugin 'scrooloose/nerdtree'
+  Plugin 'Valloric/YouCompleteMe'
+  Plugin 'octol/vim-cpp-enhanced-highlight'
   Plugin 'vim-scripts/a.vim'
   Plugin 'vim-scripts/camelcasemotion'
-  Plugin 'ggreer/the_silver_searcher'
-  Plugin 'ctrlpvim/ctrlp.vim'
-  Plugin 'FelikZ/ctrlp-py-matcher'
-  Plugin 'mhinz/vim-signify'
-  Plugin 'prabirshrestha/vim-lsp'
-  Plugin 'prabirshrestha/async.vim'
-  Plugin 'scrooloose/nerdcommenter'
   Plugin 'easymotion/vim-easymotion'
+  Plugin 'scrooloose/nerdcommenter'
   Plugin 'jlanzarotta/bufexplorer'
-  "Plugin 'scrooloose/syntastic'
-  "Plugin 'SirVer/ultisnips'
-  "Plugin 'honza/vim-snippets'
+  Plugin 'SirVer/ultisnips'
+  Plugin 'honza/vim-snippets'
+  Plugin 'ctrlpvim/ctrlp.vim'
+  Plugin 'ggreer/the_silver_searcher'
+  Plugin 'FelikZ/ctrlp-py-matcher'
+  Plugin 'NLKNguyen/papercolor-theme'
   " Provide many default snippets for a variety of snippets.
   " Uncomment and :PluginInstall to enable
-  " Plugin 'honza/vim-snippets'
 
   call vundle#end()
 else
   echomsg 'Vundle is not installed. You can install Vundle from'
         \ 'https://github.com/VundleVim/Vundle.vim'
 endif
-
-" Language Server or ctags?
-"nnoremap gd :<C-u>LspDefinition<CR>
 
 " All of your plugins must be added before the following line.
 
@@ -58,26 +48,18 @@ endif
 " - auto-detect pasting (https://github.com/ConradIrwin/vim-bracketed-paste)
 filetype plugin indent on
 
-" Airline options
-" Enable the list of buffers
-let g:airline#extensions#tabline#enabled = 1
-" Show just the filename
-let g:airline#extensions#tabline#fnamemod = ':t'
-" Show buffer numbers
-let g:airline#extensions#tabline#buffer_nr_show = 1
+" == CtrlP ===================================================================
 
-" NERDTree options
-" ctrl+n toggles NERDTree
-map <C-n> :NERDTreeToggle<CR>
-
-" Speeding up CtrlP
 let g:ctrlp_root_markers = ['.ctrlp_root']
-let g:ctrlp_working_path_mode = 0
+let g:ctrlp_working_path_mode = 'rw'
 let g:ctrlp_max_files = 30000
 let g:ctrlp_follow_symlinks = 1
 let g:ctrlp_switch_buffer = 2
+let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+let g:ctrlp_lazy_update = 300
+let g:ctrlp_clear_cache_on_exit = 0
 
-" Use AG for CtrlP
+" Use ag for CtrlP
 if executable('ag')
   " Use ag over grep
   set grepprg=ag\ --nogroup\ --nocolor
@@ -96,12 +78,27 @@ if executable('ag')
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 endif
-let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
-" Signify
-let g:signify_vcs_list = ['hg']
-let g:signify_realtime = 1
+" == UltiSnips ===============================================================
 
+let g:UltiSnipsExpandTrigger = "<c-j>"
+let g:UltiSnipsJumpForwardTrigger = "<c-j>"
+let g:UltiSnipsJumpBackwardTrigger = "<c-k>"
+
+" == YouCompleteMe ===========================================================
+
+nnoremap gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+let g:ycm_confirm_extra_conf = 0
+
+" ----------------------------------------------------------------------------
+
+" CTRL-hjkl to navigate to other panes
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" Highlight as an error if line is over 80.
 function! HighlightTooLongLines()
   highlight def link RightMargin Error
   if &textwidth != 0
@@ -113,45 +110,29 @@ augroup filetypedetect
   au WinEnter,BufNewFile,BufRead * call HighlightTooLongLines()
 augroup END
 
-
-"===================="
-"" Some basic options "
-"===================="
-
-" Enable syntax highlighting
 syntax on
-" Show line numbers
 set number
+set cursorline
 " use » to mark Tabs and ° to mark trailing whitespace. This is a
 " non-obtrusive way to mark these special characters.
 set list listchars=tab:»\ ,trail:°
 
 " Highlight the search term when you search for it.
 set hlsearch
+set incsearch
 nnoremap <return> :noh<return>
 
 set showcmd
 
-set background=dark
-colorscheme PaperColor
-
 " Split new panes right instead of left
 set splitright
 
-" CTRL-hjkl to navigate to other panes
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-
-" Cursorline
-set cursorline
-
-" Close buffer but don't close pane.
+" Close current buffer and open up last seen buffer.
 nnoremap BD :lclose<bar>b#<bar>bd #<CR>
 
-" Don't have cursorlines on unfocused panes
-au BufEnter * setlocal cursorline
-au BufLeave * setlocal nocursorline
-au WinLeave * setlocal nocursorline
+" When opening files, fold on indentation.
+"set foldmethod=indent
+
+set background=dark
+colorscheme PaperColor
 
