@@ -1,0 +1,25 @@
+{
+  "coc.preferences.formatOnSaveFiletypes": [ "python", "json", "sql", "rust", "markdown" ],
+  "json.format.keepLines": true,
+  "python.formatting.provider": "black",
+  "python.venvPath": "/Users/dustinpho/.venvs",
+  "pyright.inlayHints.functionReturnTypes": false,
+  "pyright.inlayHints.variableTypes": false,
+  "pyright.inlayHints.parameterTypes": false,
+  "pyright.testing.provider": "pytest",
+  "pyright.organizeimports.provider": "ruff",
+  "languageserver": {
+    "sql": {
+      "command": "$HOME/go/bin/sqls",
+      "args": [ "--config", "$HOME/.config/sqls/config.yml" ],
+      "filetypes": [ "sql" ],
+      "shell": true
+    }
+  },
+  "rust-analyzer.check.command": "clippy",
+  "workspace.ignoredFolders": [
+    "$HOME",
+    "$HOME/.cargo/**",
+    "$HOME/.rustup/**"
+  ]
+}
