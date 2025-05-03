@@ -43,7 +43,9 @@ def install_packages():
     print("[chezmoi] Installing system packages...")
 
     maybe_install_brew()
-    run(["brew", "install", "git", "zsh", "curl", "tmux", "vim"])
+    run(
+        ["brew", "install", "git", "zsh", "curl", "tmux", "vim", "fzf", "node", "black"]
+    )
     run(["brew", "install", "--cask", "font-powerline-symbols"])
 
 
@@ -106,7 +108,6 @@ def install_ohmyzsh_and_p10k():
     # Change shell to zsh
     zsh_path = shutil.which("zsh")
     if os.environ.get("SHELL") != zsh_path and zsh_path:
-        run(["sudo", "sh", "-c", '"echo $(which zsh) >> /etc/shells"'])
         run(["chsh", "-s", zsh_path])
 
 
@@ -115,6 +116,18 @@ def main():
     install_tmux_plugins()
     install_vim_plug()
     install_ohmyzsh_and_p10k()
+
+    # Set up fzf keybindings for shell
+    run(
+        [
+            "$(brew --prefix)/opt/fzf/install",
+            "--key-bindings",
+            "--completion",
+            "--no-update-rc",
+        ],
+        shell=True,
+    )
+
     print("[chezmoi] Setup complete. Restart your terminal.")
 
 
