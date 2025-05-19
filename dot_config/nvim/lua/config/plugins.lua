@@ -35,11 +35,54 @@ require("lazy").setup({
     end,
   },
 
+  -- pane navigation
+  {
+    'alexghergh/nvim-tmux-navigation',
+    config = function()
+      local nvim_tmux_nav = require('nvim-tmux-navigation')
+
+      nvim_tmux_nav.setup {
+        disable_when_zoomed = true -- defaults to false
+      }
+    end
+  },
+
+  -- autopairs
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    config = function()
+      require("nvim-autopairs").setup({})
+    end,
+  },
+
+
   -- Treesitter syntax highlighting
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 
   -- Telescope fuzzy finder
   { "nvim-telescope/telescope.nvim",   dependencies = { "nvim-lua/plenary.nvim" } },
+
+  -- Tree file directory
+  {
+    "nvim-tree/nvim-tree.lua",
+    config = function()
+      require("nvim-tree").setup({
+        view = {
+          width = 30,
+          side = "left",
+          preserve_window_proportions = true,
+        },
+        filters = {
+          dotfiles = false,
+        },
+        git = {
+          enable = true,
+          ignore = false,
+        },
+      })
+    end,
+  },
 
   -- LSP
   { "neovim/nvim-lspconfig" },
@@ -53,7 +96,6 @@ require("lazy").setup({
     end,
     dependencies = {
       "nvim-treesitter/nvim-treesitter", -- recommended
-      "nvim-tree/nvim-web-devicons",     -- optional icons
     },
   },
 
