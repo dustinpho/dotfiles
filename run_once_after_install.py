@@ -44,7 +44,20 @@ def install_packages():
 
     maybe_install_brew()
     run(
-        ["brew", "install", "git", "zsh", "curl", "tmux", "vim", "fzf", "node", "black"]
+        [
+            "brew",
+            "install",
+            "git",
+            "zsh",
+            "curl",
+            "tmux",
+            "nvim",
+            "fzf",
+            "node",
+            "black",
+            "ripgrep",
+            "fd",
+        ]
     )
     run(["brew", "install", "--cask", "font-powerline-symbols"])
 
@@ -61,22 +74,6 @@ def install_tmux_plugins():
         run([os.path.join(tpm_dir, "bin/install_plugins")])
         run(["tmux", "kill-server"])
         print("[chezmoi] Tmux plugins installed.")
-
-
-def install_vim_plug():
-    print("[chezmoi] Installing vim-plug...")
-    plug_path = os.path.expanduser("~/.vim/autoload/plug.vim")
-    if not os.path.exists(plug_path):
-        run(
-            [
-                "curl",
-                "-fLo",
-                plug_path,
-                "--create-dirs",
-                "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim",
-            ]
-        )
-    run(["vim", "+PlugInstall", "+qall"])
 
 
 def install_ohmyzsh_and_p10k():
@@ -106,16 +103,53 @@ def install_ohmyzsh_and_p10k():
         )
 
     # Change shell to zsh
-    zsh_path = shutil.which("zsh")
-    if os.environ.get("SHELL") != zsh_path and zsh_path:
-        run(["chsh", "-s", zsh_path])
+    print("[chezmoi] Please set your default shell to zsh using: chsh -s zsh")
+    # zsh_path = shutil.which("zsh")
+    # if os.environ.get("SHELL") != zsh_path and zsh_path:
+    #     run(["chsh", "-s", zsh_path])
+
+
+def install_rust():
+    print("[chezmoi] Installing Rust ecosystem...")
+
+    if not shutil.which("rustup"):
+        run(
+            [
+                "curl",
+                "--proto",
+                "=https",
+                "--tlsv1.2",
+                "-sSf",
+                "https://sh.rustup.rs",
+                "|",
+                "sh",
+                "-s",
+                "--",
+                "-y",
+            ],
+            shell=True,
+        )
+        os.environ["PATH"] += f":{os.path.expanduser('~')}/.cargo/bin"
+
+    print("[chezmoi] Installing rust-analyzer, rustfmt, clippy, and cargo tools...")
+    run(["rustup", "update"])
+    run(["rustup", "component", "add", "rustfmt"])
+    run(["rustup", "component", "add", "clippy"])
+
+    # Install rust-analyzer (via Homebrew, or use prebuilt binary if you prefer)
+    if not shutil.which("rust-analyzer"):
+        run(["brew", "install", "rust-analyzer"])
+
+    # Useful cargo subcommands
+    run(["cargo", "install", "cargo-edit"])
+    run(["cargo", "install", "cargo-watch"])
 
 
 def main():
     install_packages()
     install_tmux_plugins()
-    install_vim_plug()
     install_ohmyzsh_and_p10k()
+    install_rust()
 
     # Set up fzf keybindings for shell
     run(

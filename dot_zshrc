@@ -88,9 +88,11 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
+alias vim='nvim'
+
 # Preferred editor
-export EDITOR='vim'
-export VISUAL=vim
+export EDITOR='nvim'
+export VISUAL='nvim'
 set -o vi
 
 # vi-mode plugin options
@@ -112,5 +114,3 @@ VI_MODE_SET_CURSOR=true
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
