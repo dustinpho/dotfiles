@@ -9,10 +9,10 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   -- Package manager
-  { "williamboman/mason.nvim", config = true },
+  { "williamboman/mason.nvim",           config = true },
   { "williamboman/mason-lspconfig.nvim", config = true },
 
-	-- Tool installer
+  -- Tool installer
   {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     opts = {
@@ -21,18 +21,41 @@ require("lazy").setup({
         "black",
         "rust-analyzer",
         "clangd",
+        "lua_ls",
       },
     },
   },
 
-  -- LSP
-  { "neovim/nvim-lspconfig" },
+  -- git signs in the gutter
+  {
+    "lewis6991/gitsigns.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require("gitsigns").setup()
+    end,
+  },
 
   -- Treesitter syntax highlighting
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 
   -- Telescope fuzzy finder
-  { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
+  { "nvim-telescope/telescope.nvim",   dependencies = { "nvim-lua/plenary.nvim" } },
+
+  -- LSP
+  { "neovim/nvim-lspconfig" },
+
+  -- UI for LSP
+  {
+    "nvimdev/lspsaga.nvim",
+    event = "LspAttach",
+    config = function()
+      require("lspsaga").setup({})
+    end,
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter", -- recommended
+      "nvim-tree/nvim-web-devicons",     -- optional icons
+    },
+  },
 
   -- Formatting
   {
@@ -84,4 +107,3 @@ require("lazy").setup({
     end,
   },
 })
-

@@ -8,5 +8,6 @@ vim.opt.smartindent = true
 vim.opt.wrap = false
 vim.opt.cursorline = true
 vim.opt.updatetime = 300
+vim.o.mouse = ""
 
 vim.cmd("colorscheme retrobox")

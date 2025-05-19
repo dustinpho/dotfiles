@@ -1,14 +1,15 @@
-vim.g.mapleader = "\\"
+-- Telescope keymaps
+local builtin = require("telescope.builtin")
+local opts = { noremap = true, silent = true }
 
-local keymap = vim.keymap.set
-keymap("n", "<leader>f", function()
-  vim.lsp.buf.format({ async = true  })
-end, { desc = "Format buffer"  })
+-- Telescope: Normal mode
+vim.keymap.set("n", "<leader>ff", builtin.find_files, opts)
+vim.keymap.set("n", "<leader>fg", builtin.live_grep, opts)
+vim.keymap.set("n", "<leader>fb", builtin.buffers, opts)
+vim.keymap.set("n", "<leader>fh", builtin.help_tags, opts)
+vim.keymap.set("n", "<leader>fr", builtin.oldfiles, opts)
 
--- CamelCaseMotion mappings
--- vim.cmd [[
---   nmap <silent> w <Plug>CamelCaseMotion_w
---   nmap <silent> b <Plug>CamelCaseMotion_b
---   nmap <silent> e <Plug>CamelCaseMotion_e
--- ]]
-
+vim.keymap.set("n", "<leader>lr", builtin.lsp_references, opts)
+vim.keymap.set("n", "<leader>ld", builtin.lsp_definitions, opts)
+vim.keymap.set("n", "<leader>li", builtin.lsp_implementations, opts)
+vim.keymap.set("n", "<leader>ls", builtin.lsp_document_symbols, opts)

@@ -57,6 +57,7 @@ def install_packages():
             "black",
             "ripgrep",
             "fd",
+            "luarocks",
         ]
     )
     run(["brew", "install", "--cask", "font-powerline-symbols"])
