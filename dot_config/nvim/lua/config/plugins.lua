@@ -96,6 +96,7 @@ require("lazy").setup({
     end,
     dependencies = {
       "nvim-treesitter/nvim-treesitter", -- recommended
+      "nvim-tree/nvim-web-devicons",     -- optional icons
     },
   },
 

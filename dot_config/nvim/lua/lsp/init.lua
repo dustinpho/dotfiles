@@ -1,7 +1,8 @@
 local lspconfig = require("lspconfig")
 local mason = require("mason")
 local mason_lspconfig = require("mason-lspconfig")
-local on_attach = require("lsp.on_attach")
+-- local native = require("lsp.native")
+local lspsaga = require("lsp.lspsaga")
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 mason.setup()
@@ -20,7 +21,7 @@ mason_lspconfig.setup({
 
 for _, server in ipairs(servers) do
   lspconfig[server].setup({
-    on_attach = on_attach,
+    on_attach = lspsaga.on_attach,
     capabilities = capabilities,
   })
 end
