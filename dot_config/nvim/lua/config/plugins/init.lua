@@ -26,7 +26,7 @@ require("lazy").setup({
     },
   },
 
-  -- detect key map conflicts
+  -- detect key map conflicts and show available actions when typing
   {
     "folke/which-key.nvim",
     event = "VeryLazy", -- lazy-load after startup
@@ -48,12 +48,27 @@ require("lazy").setup({
   {
     'alexghergh/nvim-tmux-navigation',
     config = function()
-      local nvim_tmux_nav = require('nvim-tmux-navigation')
+      require("config.plugins.tmux-navigation").setup()
+    end,
+  },
 
-      nvim_tmux_nav.setup {
-        disable_when_zoomed = true -- defaults to false
-      }
-    end
+  -- Indentation guides
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl", -- Required for latest v3+
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require("ibl").setup()
+    end,
+  },
+
+  -- Surround editing (add/change/delete quotes, brackets, etc.)
+  {
+    "kylechui/nvim-surround",
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup()
+    end,
   },
 
   -- autopairs
@@ -88,7 +103,10 @@ require("lazy").setup({
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons", -- optional
-    }
+    },
+    config = function()
+      require("config.plugins.telescope").setup()
+    end,
   },
 
   -- Tree file directory
@@ -96,20 +114,7 @@ require("lazy").setup({
     "nvim-tree/nvim-tree.lua",
     dependencies = { "nvim-tree/nvim-web-devicons" }, -- optional
     config = function()
-      require("nvim-tree").setup({
-        view = {
-          width = 30,
-          side = "left",
-          preserve_window_proportions = true,
-        },
-        filters = {
-          dotfiles = false,
-        },
-        git = {
-          enable = true,
-          ignore = true,
-        },
-      })
+      require("config.plugins.nvim-tree").setup()
     end,
   },
 

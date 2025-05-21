@@ -6,6 +6,4 @@ vim.opt.mouse = ""
 
 require("config.plugins")
 require("config.options")
-require("config.keymaps")
-
 require("lsp")
