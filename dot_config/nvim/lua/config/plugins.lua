@@ -26,6 +26,15 @@ require("lazy").setup({
     },
   },
 
+  -- detect key map conflicts
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy", -- lazy-load after startup
+    config = function()
+      require("which-key").setup({})
+    end,
+  },
+
   -- git signs in the gutter
   {
     "lewis6991/gitsigns.nvim",
@@ -56,12 +65,25 @@ require("lazy").setup({
     end,
   },
 
+  -- Commenting
+  {
+    "numToStr/Comment.nvim",
+    config = function()
+      require("Comment").setup()
+    end,
+  },
 
   -- Treesitter syntax highlighting
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 
   -- Telescope fuzzy finder
-  { "nvim-telescope/telescope.nvim",   dependencies = { "nvim-lua/plenary.nvim" } },
+  {
+    "nvim-telescope/telescope.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", -- optional
+    }
+  },
 
   -- Tree file directory
   {
@@ -78,26 +100,31 @@ require("lazy").setup({
         },
         git = {
           enable = true,
-          ignore = false,
+          ignore = true,
         },
       })
     end,
+    dependencies = { "nvim-tree/nvim-web-devicons" }, -- optional
   },
 
   -- LSP
   { "neovim/nvim-lspconfig" },
 
-  -- UI for LSP
+  -- LSP UI
   {
     "nvimdev/lspsaga.nvim",
     event = "LspAttach",
-    config = function()
-      require("lspsaga").setup({})
-    end,
     dependencies = {
-      "nvim-treesitter/nvim-treesitter", -- recommended
-      "nvim-tree/nvim-web-devicons",     -- optional icons
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons", -- optional
     },
+    config = function()
+      require("lspsaga").setup({
+        lightbulb = {
+          enable = false,
+        },
+      })
+    end,
   },
 
   -- Formatting
