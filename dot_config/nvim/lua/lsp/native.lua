@@ -14,6 +14,7 @@ function M.on_attach(client, bufnr)
   vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { buffer = bufnr, desc = "Prev Diagnostic" })
   vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { buffer = bufnr, desc = "Next Diagnostic" })
 
+  -- Format via conform
   vim.keymap.set("n", "<leader>f", function()
     require("conform").format({ lsp_fallback = true })
   end, { desc = "Format file" })
