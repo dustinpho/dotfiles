@@ -26,6 +26,40 @@ require("lazy").setup({
     },
   },
 
+  -- colorscheme
+  {
+    "EdenEast/nightfox.nvim",
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme("carbonfox") -- Or duskfox, nightfox
+    end,
+  },
+
+  -- statusline
+  {
+    "nvim-lualine/lualine.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      require("lualine").setup({
+        options = {
+          theme = "auto", -- or your theme name like "tokyonight", "gruvbox"
+          section_separators = { left = "", right = "" },
+          component_separators = { left = "", right = "" },
+          icons_enabled = true,
+        },
+        sections = {
+          lualine_a = { "mode" },
+          lualine_b = { "branch", "diff", "diagnostics" },
+          lualine_c = { "filename" },
+          lualine_x = { "encoding", "fileformat", "filetype" },
+          lualine_y = { "progress" },
+          lualine_z = { "location" },
+        },
+      })
+    end,
+  },
+
+
   -- detect key map conflicts and show available actions when typing
   {
     "folke/which-key.nvim",

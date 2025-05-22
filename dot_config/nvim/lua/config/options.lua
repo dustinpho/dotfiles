@@ -10,4 +10,4 @@ vim.opt.signcolumn = "yes"
 vim.opt.updatetime = 300
 vim.opt.timeoutlen = 500
 
-vim.cmd("colorscheme retrobox")
+vim.cmd("colorscheme nordfox")
