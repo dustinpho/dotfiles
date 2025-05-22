@@ -9,8 +9,8 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   -- Package manager
-  { "williamboman/mason.nvim",           config = true },
-  { "williamboman/mason-lspconfig.nvim", config = true },
+  { "williamboman/mason.nvim",          config = true },
+  { "williamboman/mason-lspconfig.nvim" },
 
   -- Tool installer
   {
@@ -22,18 +22,13 @@ require("lazy").setup({
         "rust-analyzer",
         "clangd",
         "lua_ls",
+        "gopls",
       },
     },
   },
 
   -- colorscheme
-  {
-    "EdenEast/nightfox.nvim",
-    priority = 1000,
-    config = function()
-      vim.cmd.colorscheme("carbonfox") -- Or duskfox, nightfox
-    end,
-  },
+  { "EdenEast/nightfox.nvim", priority = 1000 },
 
   -- statusline
   {
