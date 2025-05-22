@@ -87,7 +87,20 @@ require("lazy").setup({
     main = "ibl", -- Required for latest v3+
     event = { "BufReadPre", "BufNewFile" },
     config = function()
-      require("ibl").setup()
+      require("ibl").setup({
+        indent = {
+          char = "┊",
+          highlight = "IblIndent",
+        },
+        scope = {
+          enabled = false, -- disable scope lines if you want it more subtle
+        },
+        exclude = {
+          filetypes = { "help", "dashboard", "lazy", "NvimTree" },
+          buftypes = { "terminal", "nofile" },
+        },
+      })
+      vim.api.nvim_set_hl(0, "IblIndent", { fg = "#3b4252", nocombine = true })
     end,
   },
 
@@ -152,20 +165,45 @@ require("lazy").setup({
 
   -- LSP UI
   {
-    "nvimdev/lspsaga.nvim",
-    event = "LspAttach",
+    "folke/noice.nvim",
+    event = "VeryLazy",
     dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-tree/nvim-web-devicons", -- optional
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
     },
     config = function()
-      require("lspsaga").setup({
-        lightbulb = {
-          enable = false,
+      require("noice").setup({
+        lsp = {
+          hover = {
+            enabled = true, -- enables Noice hover window
+          },
+          signature = {
+            enabled = true, -- Noice signature help
+          },
+          message = {
+            enabled = true, -- LSP messages like rename and progress
+          },
         },
+        presets = {
+          lsp_doc_border = true, -- bordered docs like Lspsaga
+        },
+      })
+
+      vim.notify = require("notify") -- Use noice-enhanced notify
+    end,
+  },
+
+  {
+    "aznhe21/actions-preview.nvim",
+    event = "LspAttach",
+    config = function()
+      require("actions-preview").setup({
+        -- compact dropdown theme instead of full-screen list
+        telescope = require("telescope.themes").get_dropdown({}),
       })
     end,
   },
+
 
   -- Formatting
   {

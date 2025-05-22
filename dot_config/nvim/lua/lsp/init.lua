@@ -1,5 +1,5 @@
 local lspconfig = require("lspconfig")
-local lspsaga = require("lsp.lspsaga")
+local on_attach = require("lsp.on_attach").on_attach
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 -- LSP servers
@@ -13,7 +13,7 @@ local servers = {
 
 for _, server in ipairs(servers) do
   local opts = {
-    on_attach = lspsaga.on_attach,
+    on_attach = on_attach,
     capabilities = capabilities,
   }
 
@@ -23,6 +23,16 @@ for _, server in ipairs(servers) do
         check = {
           command = "clippy", -- this enables running clippy for diagnostics
         },
+        inlayHints = {
+          bindingModeHints = { enable = true },
+          chainingHints = { enable = true },
+          closingBraceHints = { enable = true },
+          lifetimeElisionHints = { enable = true },
+          parameterHints = { enable = true },
+          reborrowHints = { enable = true },
+          typeHints = { enable = true },
+        },
+
       },
     }
   end

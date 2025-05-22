@@ -4,7 +4,20 @@ function M.setup()
   local telescope = require("telescope")
   telescope.setup({
     defaults = {
-      -- your telescope config here
+      mappings = {
+        i = { -- insert mode
+          ["<C-j>"] = require("telescope.actions").move_selection_next,
+          ["<C-k>"] = require("telescope.actions").move_selection_previous,
+          ["<C-h>"] = require("telescope.actions").cycle_history_prev,
+          ["<C-l>"] = require("telescope.actions").cycle_history_next,
+        },
+        n = { -- normal mode
+          ["j"] = require("telescope.actions").move_selection_next,
+          ["k"] = require("telescope.actions").move_selection_previous,
+          ["h"] = require("telescope.actions").cycle_history_prev,
+          ["l"] = require("telescope.actions").cycle_history_next,
+        },
+      },
     },
   })
 
