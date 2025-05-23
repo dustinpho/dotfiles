@@ -26,9 +26,10 @@ function M.on_attach(client, bufnr)
   vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { buffer = bufnr, desc = "Next Diagnostic" })
 
   -- Format
-  vim.keymap.set("n", "<leader>f", function()
+  vim.keymap.set("n", "<leader>=<CR>", function()
     require("conform").format({ lsp_fallback = true })
-  end, { buffer = bufnr, desc = "Format File" })
+  end, { desc = "Format file with Conform" })
+
 
   -- show diagnostic on CursorHold
   vim.api.nvim_create_autocmd("CursorHold", {

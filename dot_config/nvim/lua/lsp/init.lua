@@ -27,10 +27,10 @@ for _, server in ipairs(servers) do
           bindingModeHints = { enable = true },
           chainingHints = { enable = true },
           closingBraceHints = { enable = true },
-          lifetimeElisionHints = { enable = true },
           parameterHints = { enable = true },
-          reborrowHints = { enable = true },
           typeHints = { enable = true },
+          reborrowHints = { enable = false },        -- annoying hints about implicit borrows
+          lifetimeElisionHints = { enable = false }, -- annoying lifetime hints
         },
 
       },
