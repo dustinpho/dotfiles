@@ -1,11 +1,22 @@
 [user]
 	name = Dustin Pho
 	email = dustinpho@gmail.com
+
 [core]
 	pager = delta --paging=always
+
+[interactive]
+  diffFilter = delta --color-only
+
 [delta]
-	syntax-theme = Monokai
+	syntax-theme = zenburn
 	line-numbers = true
 	side-by-side = true
-	hunk-header-style = bold green
-	file-style = bold yellow
+  navigate = true  # use n and N to move between diff sections
+  file-style = "bold red"
+  hunk-header-style = "bold magenta"
+
+    
+[merge]
+  conflictstyle = zdiff3
+	tool = vimdiff
