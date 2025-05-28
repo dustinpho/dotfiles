@@ -58,6 +58,8 @@ def install_packages():
             "ripgrep",
             "fd",
             "luarocks",
+            "git-delta",
+            "vimpager",
         ]
     )
     run(["brew", "install", "--cask", "font-powerline-symbols"])

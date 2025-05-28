@@ -1,0 +1,11 @@
+[user]
+	name = Dustin Pho
+	email = dustinpho@gmail.com
+[core]
+	pager = delta --paging=always
+[delta]
+	syntax-theme = Monokai
+	line-numbers = true
+	side-by-side = true
+	hunk-header-style = bold green
+	file-style = bold yellow
