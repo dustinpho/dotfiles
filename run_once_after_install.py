@@ -47,19 +47,20 @@ def install_packages():
         [
             "brew",
             "install",
-            "git",
-            "zsh",
             "curl",
+            "zsh",
             "tmux",
-            "nvim",
-            "fzf",
+            "git",
+            "git-delta",
             "node",
+            "nvim",
+            "nvimdiff",
+            "nvimpager",
+            "fzf",
             "black",
             "ripgrep",
             "fd",
             "luarocks",
-            "git-delta",
-            "vimpager",
         ]
     )
     run(["brew", "install", "--cask", "font-powerline-symbols"])

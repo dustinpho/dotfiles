@@ -93,10 +93,10 @@ alias vim='nvim'
 # Preferred editor
 export EDITOR='nvim'
 export VISUAL='nvim'
-export PAGER='vimpager'
+export PAGER='nvimpager'
 set -o vi
 
-# less options
+# use less with vi mode
 export LESS='-RXN'
 
 # vi-mode plugin options

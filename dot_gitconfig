@@ -19,4 +19,8 @@
     
 [merge]
   conflictstyle = zdiff3
-	tool = vimdiff
+	tool = nvimdiff
+[mergetool]
+	prompt = false
+[mergetool "nvimdiff"]
+	cmd = nvim -d \"$LOCAL\" \"$REMOTE\" \"$MERGED\" -c \"wincmd l\"
