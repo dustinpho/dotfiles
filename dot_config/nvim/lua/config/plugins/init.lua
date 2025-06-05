@@ -45,7 +45,12 @@ require("lazy").setup({
         sections = {
           lualine_a = { "mode" },
           lualine_b = { "branch", "diff", "diagnostics" },
-          lualine_c = { "filename" },
+          lualine_c = {
+            {
+              "filename",
+              path = 1, -- relative path from cwd
+            }
+          },
           lualine_x = { "encoding", "fileformat", "filetype" },
           lualine_y = { "progress" },
           lualine_z = { "location" },
@@ -54,6 +59,8 @@ require("lazy").setup({
     end,
   },
 
+  -- simpler buffer explorer
+  { "jlanzarotta/bufexplorer" },
 
   -- detect key map conflicts and show available actions when typing
   {
@@ -193,6 +200,7 @@ require("lazy").setup({
     end,
   },
 
+  -- better code action previews
   {
     "aznhe21/actions-preview.nvim",
     event = "LspAttach",

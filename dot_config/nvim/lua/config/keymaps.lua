@@ -12,3 +12,5 @@ vim.keymap.set("v", "<Up>", "<Nop>", opts)
 vim.keymap.set("v", "<Down>", "<Nop>", opts)
 vim.keymap.set("v", "<Left>", "<Nop>", opts)
 vim.keymap.set("v", "<Right>", "<Nop>", opts)
+
+vim.keymap.set('n', '<Esc>', '<Cmd>nohlsearch<CR>', { silent = true })

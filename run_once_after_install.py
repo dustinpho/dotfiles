@@ -54,7 +54,6 @@ def install_packages():
             "git-delta",
             "node",
             "nvim",
-            "nvimdiff",
             "nvimpager",
             "fzf",
             "black",
