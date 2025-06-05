@@ -43,26 +43,9 @@ def install_packages():
     print("[chezmoi] Installing system packages...")
 
     maybe_install_brew()
-    run(
-        [
-            "brew",
-            "install",
-            "curl",
-            "zsh",
-            "tmux",
-            "git",
-            "git-delta",
-            "node",
-            "nvim",
-            "nvimpager",
-            "fzf",
-            "black",
-            "ripgrep",
-            "fd",
-            "luarocks",
-        ]
-    )
-    run(["brew", "install", "--cask", "font-powerline-symbols"])
+
+    brewfile = os.path.expanduser("~/.Brewfile")  # or your chosen location
+    run(["brew", "bundle", "--file", brewfile])
 
 
 def install_tmux_plugins():
@@ -84,11 +67,7 @@ def install_ohmyzsh_and_p10k():
     omz_dir = os.path.expanduser("~/.oh-my-zsh")
     if not os.path.isdir(omz_dir):
         run(
-            [
-                "sh",
-                "-c",
-                "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)",
-            ],
+            "curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh",
             shell=True,
         )
 

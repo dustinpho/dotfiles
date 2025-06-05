@@ -1,0 +1,19 @@
+# Tap for fonts (required for Nerd Fonts)
+tap "homebrew/cask-fonts"
+
+brew "curl"
+brew "zsh"
+brew "tmux"
+brew "git"
+brew "git-delta"
+brew "node"
+brew "nvim"
+brew "nvimpager"
+brew "fzf"
+brew "black"
+brew "ripgrep"
+brew "fd"
+brew "luarocks"
+brew "rust-analyzer"
+
+cask "font-meslo-lg-nerd-font"
