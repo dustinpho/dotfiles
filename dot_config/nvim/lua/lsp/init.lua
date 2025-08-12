@@ -9,7 +9,7 @@ local servers = {
   "clangd",
   "lua_ls",
   "gopls",
-  "typescript-language-server",
+  "biome",
 }
 
 for _, server in ipairs(servers) do
@@ -22,7 +22,7 @@ for _, server in ipairs(servers) do
     opts.settings = {
       ["rust-analyzer"] = {
         check = {
-          command = "clippy",           -- this enables running clippy for diagnostics
+          command = "clippy", -- this enables running clippy for diagnostics
         },
         inlayHints = {
           bindingModeHints = { enable = true },
@@ -30,8 +30,8 @@ for _, server in ipairs(servers) do
           closingBraceHints = { enable = true },
           parameterHints = { enable = true },
           typeHints = { enable = true },
-          reborrowHints = { enable = false },                  -- annoying hints about implicit borrows
-          lifetimeElisionHints = { enable = false },           -- annoying lifetime hints
+          reborrowHints = { enable = false },        -- annoying hints about implicit borrows
+          lifetimeElisionHints = { enable = false }, -- annoying lifetime hints
         },
       },
     }
