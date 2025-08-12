@@ -49,9 +49,9 @@ function M.setup()
           local kind1 = entry1:get_kind()
           local kind2 = entry2:get_kind()
           local field_kinds = {
-            [5] = true, -- Field
-            [6] = true, -- Variable
-            [7] = true, -- Property
+            [5] = true,             -- Field
+            [6] = true,             -- Variable
+            [7] = true,             -- Property
           }
 
           if field_kinds[kind1] and not field_kinds[kind2] then

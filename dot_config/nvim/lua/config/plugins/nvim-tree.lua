@@ -2,18 +2,27 @@ local M = {}
 
 function M.setup()
   require("nvim-tree").setup({
+    -- update_focused_file = { enable = true },
     view = {
       width = 30,
       side = "left",
-      preserve_window_proportions = true,
+      -- preserve_window_proportions = true,
+      number = true,
     },
     filters = {
       dotfiles = false,
-      custom = { "target", "release" }, -- example to hide Rust build folders
+      custom = { "target", "release" },       -- hide Rust build folders
     },
     git = {
       enable = true,
       ignore = true,
+    },
+    actions = {
+      open_file = {
+        window_picker = {
+          enable = false
+        }
+      }
     },
   })
 

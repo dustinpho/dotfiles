@@ -10,6 +10,8 @@ function M.setup()
       "cpp",
       "sql",
       "bash",
+      "typescript",
+      "tsx",
       "json",
       "yaml",
       "toml",

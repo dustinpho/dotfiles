@@ -7,7 +7,7 @@ function M.on_attach(client, bufnr)
   -- Goto
   vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = bufnr, desc = "LSP Goto Definition" })
   vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { buffer = bufnr, desc = "LSP Implementation" })
-  vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = bufnr, desc = "LSP References" })
+  -- vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = bufnr, desc = "LSP References" })
 
   -- Rename & Code Action
   vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = bufnr, desc = "LSP Rename" })

@@ -23,12 +23,20 @@ require("lazy").setup({
         "clangd",
         "lua_ls",
         "gopls",
+        "sqlfluff",
       },
     },
   },
 
   -- colorscheme
   { "EdenEast/nightfox.nvim", priority = 1000 },
+
+  -- automatic session management
+  {
+    'rmagatti/auto-session',
+    lazy = false,
+    opts = { suppressed_dirs = { '~/', '/' } }
+  },
 
   -- statusline
   {
@@ -37,7 +45,7 @@ require("lazy").setup({
     config = function()
       require("lualine").setup({
         options = {
-          theme = "auto", -- or your theme name like "tokyonight", "gruvbox"
+          theme = "auto",           -- or your theme name like "tokyonight", "gruvbox"
           section_separators = { left = "", right = "" },
           component_separators = { left = "", right = "" },
           icons_enabled = true,
@@ -48,7 +56,7 @@ require("lazy").setup({
           lualine_c = {
             {
               "filename",
-              path = 1, -- relative path from cwd
+              path = 1,               -- relative path from cwd
             }
           },
           lualine_x = { "encoding", "fileformat", "filetype" },
@@ -65,7 +73,7 @@ require("lazy").setup({
   -- detect key map conflicts and show available actions when typing
   {
     "folke/which-key.nvim",
-    event = "VeryLazy", -- lazy-load after startup
+    event = "VeryLazy",     -- lazy-load after startup
     config = function()
       require("which-key").setup({})
     end,
@@ -80,6 +88,9 @@ require("lazy").setup({
     end,
   },
 
+  -- git blame
+  { "f-person/git-blame.nvim" },
+
   -- pane navigation
   {
     'alexghergh/nvim-tmux-navigation',
@@ -91,7 +102,7 @@ require("lazy").setup({
   -- Indentation guides
   {
     "lukas-reineke/indent-blankline.nvim",
-    main = "ibl", -- Required for latest v3+
+    main = "ibl",     -- Required for latest v3+
     event = { "BufReadPre", "BufNewFile" },
     config = function()
       require("ibl").setup({
@@ -100,7 +111,7 @@ require("lazy").setup({
           highlight = "IblIndent",
         },
         scope = {
-          enabled = false, -- disable scope lines if you want it more subtle
+          enabled = false,           -- disable scope lines if you want it more subtle
         },
         exclude = {
           filetypes = { "help", "dashboard", "lazy", "NvimTree" },
@@ -151,7 +162,7 @@ require("lazy").setup({
     "nvim-telescope/telescope.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons", -- optional
+      "nvim-tree/nvim-web-devicons",       -- optional
     },
     config = function()
       require("config.plugins.telescope").setup()
@@ -161,7 +172,7 @@ require("lazy").setup({
   -- Tree file directory
   {
     "nvim-tree/nvim-tree.lua",
-    dependencies = { "nvim-tree/nvim-web-devicons" }, -- optional
+    dependencies = { "nvim-tree/nvim-web-devicons" },     -- optional
     config = function()
       require("config.plugins.nvim-tree").setup()
     end,
@@ -182,21 +193,21 @@ require("lazy").setup({
       require("noice").setup({
         lsp = {
           hover = {
-            enabled = true, -- enables Noice hover window
+            enabled = true,             -- enables Noice hover window
           },
           signature = {
-            enabled = true, -- Noice signature help
+            enabled = true,             -- Noice signature help
           },
           message = {
-            enabled = true, -- LSP messages like rename and progress
+            enabled = true,             -- LSP messages like rename and progress
           },
         },
         presets = {
-          lsp_doc_border = true, -- bordered docs like Lspsaga
+          lsp_doc_border = true,           -- bordered docs like Lspsaga
         },
       })
 
-      vim.notify = require("notify") -- Use noice-enhanced notify
+      vim.notify = require("notify")       -- Use noice-enhanced notify
     end,
   },
 
@@ -212,6 +223,14 @@ require("lazy").setup({
     end,
   },
 
+  -- structural search and replace
+  -- {
+  --     "cshuaimin/ssr.nvim",
+  --     opts = {},
+  --     keys = {
+  --         { "<leader>ssr", function() require("ssr").open() end, desc = "Structural Search and Replace" },
+  --     },
+  -- },
 
   -- Formatting
   {
@@ -222,7 +241,13 @@ require("lazy").setup({
         lsp_fallback = true,
       },
       formatters_by_ft = {
+        proto = { "buf" },
         python = { "black" },
+        sql = { "sqlfluff" },
+        typescript = { "biome" },
+        typescriptreact = { "biome" },
+        javascript = { "biome" },
+        javascriptreact = { "biome" },
       },
     },
   },
