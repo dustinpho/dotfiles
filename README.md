@@ -6,7 +6,7 @@ My personal dotfiles, managed using [chezmoi](https://www.chezmoi.io/).
 Install chezmoi and clone my dotfile repository.
 ```
 brew install chezmoi
-chezmoi init --apply https://gitlab.com/dustinpho/dotfiles.git
+chezmoi init --apply https://github.com/dustinpho/dotfiles.git
 ```
 
 This installs packages and dependencies, and also stages my tmux, zsh, and vim setups. This will call `run_once_after_install.py` under the hood.
