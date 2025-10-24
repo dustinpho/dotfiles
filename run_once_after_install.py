@@ -96,19 +96,7 @@ def install_rust():
 
     if not shutil.which("rustup"):
         run(
-            [
-                "curl",
-                "--proto",
-                "=https",
-                "--tlsv1.2",
-                "-sSf",
-                "https://sh.rustup.rs",
-                "|",
-                "sh",
-                "-s",
-                "--",
-                "-y",
-            ],
+            "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y",
             shell=True,
         )
         os.environ["PATH"] += f":{os.path.expanduser('~')}/.cargo/bin"
